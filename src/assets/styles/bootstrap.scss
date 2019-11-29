@@ -1,0 +1,5 @@
+// override bootstrap theme
+@import "./overrides.scss";
+
+// core bootstrap theme
+@import "../../../node_modules/bootstrap/scss/bootstrap.scss";
