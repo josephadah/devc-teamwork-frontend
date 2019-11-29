@@ -22,7 +22,7 @@ const AppNavBar = () => {
       <div className="collapse navbar-collapse" id="navbarSupportedContent">
         <ul className="navbar-nav ml-auto">
           <li className="nav-item mx-2">
-            <NavLink to="/" className="nav-link">
+            <NavLink to="/login" className="nav-link">
               Login <span className="sr-only">(current)</span>
             </NavLink>
           </li>
