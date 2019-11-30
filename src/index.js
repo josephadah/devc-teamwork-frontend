@@ -5,11 +5,16 @@ import "../node_modules/@fortawesome/fontawesome-free/css/all.css";
 import "../node_modules/bootstrap/dist/js/bootstrap";
 import "./assets/styles/main.scss";
 import { BrowserRouter } from "react-router-dom";
+import { Provider } from "react-redux";
 import * as serviceWorker from "./serviceWorker";
+
+import store from "./state/store";
 
 ReactDOM.render(
   <BrowserRouter>
-    <App />
+    <Provider store={store}>
+      <App />
+    </Provider>
   </BrowserRouter>,
   document.getElementById("root")
 );
