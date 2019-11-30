@@ -29,10 +29,10 @@ const AppNavBar = props => {
 
       <div className="collapse navbar-collapse" id="navbarSupportedContent">
         <ul className="navbar-nav ml-auto">
-          {!props.isLoggedIn && (
+          {props.currentUser.isAdmin && (
             <li className="nav-item mx-2">
-              <NavLink to="/login" className="nav-link">
-                Login
+              <NavLink to="/create-user" className="nav-link">
+                Create User
               </NavLink>
             </li>
           )}
