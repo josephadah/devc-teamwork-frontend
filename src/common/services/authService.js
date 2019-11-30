@@ -2,6 +2,7 @@ import store from "../../state/store";
 import jwtDecode from "jwt-decode";
 import config from "../../config";
 import http from "./httpService";
+import { toast } from "react-toastify";
 import {
   LOGIN_USER,
   LOGOUT_USER,
@@ -15,8 +16,9 @@ http.setJwt(localStorage.getItem(tokenKey));
 
 const createUser = async userDto => {
   console.log(userDto);
-  const { status } = await http.post(`${baseApiUrl}create-user`, userDto);
-  if (status === 200) {
+  const { data } = await http.post(`${baseApiUrl}auth/create-user`, userDto);
+  if (data.status === "success") {
+    toast.success("User account created successfully");
     return true;
   } else {
     return false;

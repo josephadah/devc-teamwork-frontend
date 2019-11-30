@@ -34,7 +34,7 @@ axios.interceptors.response.use(
 );
 
 function setJwt(jwt) {
-  axios.defaults.headers.common["Authorization"] = `Bearer ${jwt}`;
+  axios.defaults.headers.common["token"] = jwt;
 }
 
 export default {
