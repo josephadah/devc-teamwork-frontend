@@ -1,6 +1,13 @@
 import React, { Component } from "react";
 import Joi from "joi-browser";
+import { connect } from "react-redux";
 import auth from "../common/services/authService";
+import {
+  hideNavbar,
+  hideFooter,
+  showNavbar,
+  showFooter
+} from "./../state/actions/layout";
 
 class Login extends Component {
   constructor(props) {
@@ -14,7 +21,15 @@ class Login extends Component {
     };
   }
 
-  state = {};
+  componentDidMount() {
+    this.props.hideNavbar();
+    this.props.hideFooter();
+  }
+
+  componentWillUnmount() {
+    this.props.showNavbar();
+    this.props.showFooter();
+  }
 
   schema = {
     email: Joi.string()
@@ -57,7 +72,7 @@ class Login extends Component {
     const result = await auth.login({ ...this.state.account });
     if (result) {
       const { state } = this.props.location;
-      const redirectPath = state ? state.from.pathname : "/businesses";
+      const redirectPath = state ? state.from.pathname : "/";
       window.location = redirectPath;
     }
   };
@@ -132,4 +147,9 @@ class Login extends Component {
   }
 }
 
-export default Login;
+export default connect(null, {
+  hideNavbar,
+  hideFooter,
+  showFooter,
+  showNavbar
+})(Login);

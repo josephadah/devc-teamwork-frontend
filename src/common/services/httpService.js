@@ -23,6 +23,10 @@ axios.interceptors.response.use(
 
     if (!expectedError) {
       toast.error("An unexpected error occured");
+    } else {
+      const { error: err, data } = error.response.data;
+      if (err) toast.error(err);
+      if (data && data.message) toast.error(data.message);
     }
 
     return Promise.reject(error);

@@ -1,7 +1,15 @@
 import React from "react";
+import { connect } from "react-redux";
 import { NavLink, Link } from "react-router-dom";
+import auth from "../common/services/authService";
 
-const AppNavBar = () => {
+const AppNavBar = props => {
+  const logout = e => {
+    e.preventDefault();
+    auth.logOutUser();
+    window.location = "/";
+  };
+
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-primary text-white fixed-top px-md-5 pt-3 bg-landing">
       <Link to="/" className="navbar-brand">
@@ -21,15 +29,27 @@ const AppNavBar = () => {
 
       <div className="collapse navbar-collapse" id="navbarSupportedContent">
         <ul className="navbar-nav ml-auto">
-          <li className="nav-item mx-2">
-            <NavLink to="/login" className="nav-link">
-              Login <span className="sr-only">(current)</span>
-            </NavLink>
-          </li>
+          {!props.isLoggedIn && (
+            <li className="nav-item mx-2">
+              <NavLink to="/login" className="nav-link">
+                Login
+              </NavLink>
+            </li>
+          )}
+          {props.isLoggedIn && (
+            <li className="nav-item mx-2">
+              <a href="#" onClick={logout} className="nav-link">
+                Logout
+              </a>
+            </li>
+          )}
         </ul>
       </div>
     </nav>
   );
 };
 
-export default AppNavBar;
+export default connect(state => ({
+  isLoggedIn: state.user.isLoggedIn,
+  currentUser: state.user.currentUser
+}))(AppNavBar);
